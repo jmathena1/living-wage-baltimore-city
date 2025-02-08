@@ -1,0 +1,23 @@
+{
+    "1 adult":
+    [
+        "O children": 20.43,
+        "1 child": 37.40,
+        "2 children": 47.78,
+        "3 children": 62.99
+    ],
+    "2 adults, 1 working":
+    [
+        "0 children": 28.84,
+        "1 child": 39.37,
+        "2 children": 39.37,
+        "3 children": 42.83
+    ],
+    "2 adults, both working":
+    [
+        "0 children": 14.41,
+        "1 child": 20.82,
+        "2 children": 26.29,
+        "3 children": 31.18
+    ]
+}
