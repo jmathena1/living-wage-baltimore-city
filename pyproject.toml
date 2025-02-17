@@ -1,0 +1,9 @@
+[project]
+name = "living-wage-baltimore-city"
+version = "0.1.0"
+description = "Can you afford to work for the City of Baltimore?"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "polars>=1.21",
+]
