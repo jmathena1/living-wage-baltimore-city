@@ -41,13 +41,17 @@ const formattedAnnualLivingWage = USDollar.format(calculatedAnnualLivingWage);
 ```
 <div class="grid grid-cols-2">
     <div class="card">
-        <div class="big">${formattedHourlyLivingWage} per hour or ${formattedAnnualLivingWage} annually</div>
+        <div class="big">
+            ${formattedHourlyLivingWage} per hour 
+            <br>or<br> 
+            ${formattedAnnualLivingWage} annually
+        </div>
     </div>
 </div>
 
 <br>
 
-## Here are the Median Salaries for each Baltimore City government agency...
+## Ok, who can afford to hire you?
 
 ```js
 const filteredMedianSalaries = (await FileAttachment("./data/all-median-salaries.csv").csv({typed: true})).map(salary => ({
@@ -57,14 +61,17 @@ const filteredMedianSalaries = (await FileAttachment("./data/all-median-salaries
 var affordableAgencies = filteredMedianSalaries
     .filter(salary => salary.medianSalary >= calculatedAnnualLivingWage)
     .length;
-    display(filteredMedianSalaries);
 ```
 <div class="grid grid-cols-2">
     <div class="card">
         <div class="medium">
-            <div style="color: green; font-weight: bold;">${affordableAgencies} city agencies can afford to pay you a living wage</div>
+            <div style="color: green; font-weight: bold;">
+                ${affordableAgencies} city agencies can afford to pay you a living wage
+            </div>
             <br>
-            ${Object.keys(filteredMedianSalaries).length - affordableAgencies} city agencies cannot
+            <div style="color: red; font-weight: bold;">
+                ${Object.keys(filteredMedianSalaries).length - affordableAgencies} city agencies cannot
+            </div>
             </div>
     </div>
 </div>

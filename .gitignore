@@ -1,3 +1,5 @@
 dist/
-*/.observablehq/cache/
+*/*.egg-info/
 node_modules/
+*/.observablehq/cache/
+
