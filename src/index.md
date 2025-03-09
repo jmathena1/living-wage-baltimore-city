@@ -71,15 +71,15 @@ var affordableAgencies = filteredMedianSalaries
 
 ```js
 const allMedianSalariesPlot = Plot.plot({
-    marginLeft: 10,
-    marginRight: 50,
+    style: { fontSize: "13px" },
     width: width,
     x: {
         axis: "top",
+        tickFormat: s => `$${s}k`,
         transform: s => s / 1000,
-        label: "Median Annual Salary (thousands)"
+        label: null
     },
-    y: { label: null },
+    y: { axis: null },
     marks: [
         Plot.barX(filteredMedianSalaries, {
             x: "medianSalary",
@@ -87,21 +87,23 @@ const allMedianSalariesPlot = Plot.plot({
             fill: (s) => (s.medianSalary >= calculatedAnnualLivingWage ? "green" : "red"), 
             sort: {y: "-x"}
         }),
-        Plot.axisY({
-            label: null,
-            fill: "black", 
-            fontSize: 14,
-            textAnchor: "start",
-            dx: 14,
-            tickSize: 0
-        }),
+        // for higher salaries
         Plot.text(filteredMedianSalaries, {
-            text: s => `$${Math.round(s.medianSalary / 1000)}k`,
-            y: "agency",
+            filter: s => s.medianSalary >= 65000,
+            text: s => `${s.agency} ($${Math.round(s.medianSalary / 1000)}k)`,
+            textAnchor: "end",
             x: "medianSalary",
+            y: "agency",
+            dx: -3,
+        }),
+        // for lower salaries
+        Plot.text(filteredMedianSalaries, {
+            filter: s => s.medianSalary < 65000,
+            text: s => `${s.agency} ($${Math.round(s.medianSalary / 1000)}k)`,
             textAnchor: "start",
-            dx: 3,
-            fontSize: 14
+            x: "medianSalary",
+            y: "agency",
+            dx: 4,
         })
     ]
 });
