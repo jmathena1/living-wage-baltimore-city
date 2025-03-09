@@ -72,13 +72,14 @@ var affordableAgencies = filteredMedianSalaries
 ```js
 const allMedianSalariesPlot = Plot.plot({
     marginLeft: 10,
-    marginRight: 30,
+    marginRight: 50,
     width: width,
     x: {
         axis: "top",
         transform: s => s / 1000,
         label: "Median Annual Salary (thousands)"
     },
+    y: { label: null },
     marks: [
         Plot.barX(filteredMedianSalaries, {
             x: "medianSalary",
@@ -89,6 +90,7 @@ const allMedianSalariesPlot = Plot.plot({
         Plot.axisY({
             label: null,
             fill: "black", 
+            fontSize: 14,
             textAnchor: "start",
             dx: 14,
             tickSize: 0
@@ -98,9 +100,10 @@ const allMedianSalariesPlot = Plot.plot({
             y: "agency",
             x: "medianSalary",
             textAnchor: "start",
-            dx: 3
+            dx: 3,
+            fontSize: 14
         })
     ]
 });
-display(allMedianSalariesPlot)
 ```
+<div class="card">${resize((width) => allMedianSalariesPlot)}</div>
