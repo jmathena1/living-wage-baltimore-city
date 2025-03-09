@@ -51,15 +51,32 @@ const formattedAnnualLivingWage = USDollar.format(calculatedAnnualLivingWage);
 
 ```js
 const filteredMedianSalaries = (await FileAttachment("./data/all-median-salaries.csv").csv({typed: true})).map(salary => ({
-    agency: salary["AgencyName"],
+    agency: salary["MappedAgencyName"],
     medianSalary: salary["AnnualSalary"]
     }));
+var affordableAgencies = filteredMedianSalaries
+    .filter(salary => salary.medianSalary >= calculatedAnnualLivingWage)
+    .length;
+    display(filteredMedianSalaries);
+```
+<div class="grid grid-cols-2">
+    <div class="card">
+        <div class="medium">
+            <div style="color: green; font-weight: bold;">${affordableAgencies} city agencies can afford to pay you a living wage</div>
+            <br>
+            ${Object.keys(filteredMedianSalaries).length - affordableAgencies} city agencies cannot
+            </div>
+    </div>
+</div>
+
+```js
 const allMedianSalariesPlot = Plot.plot({
     marginLeft: 10,
+    marginRight: 30,
     width: width,
     x: {
         axis: "top",
-        transform: (s) => s / 1000,
+        transform: s => s / 1000,
         label: "Median Annual Salary (thousands)"
     },
     marks: [
@@ -69,13 +86,19 @@ const allMedianSalariesPlot = Plot.plot({
             fill: (s) => (s.medianSalary >= calculatedAnnualLivingWage ? "green" : "red"), 
             sort: {y: "-x"}
         }),
-        Plot.ruleX([calculatedAnnualLivingWage], {stroke: "yellow"}),
         Plot.axisY({
             label: null,
             fill: "black", 
             textAnchor: "start",
             dx: 14,
             tickSize: 0
+        }),
+        Plot.text(filteredMedianSalaries, {
+            text: s => `$${Math.round(s.medianSalary / 1000)}k`,
+            y: "agency",
+            x: "medianSalary",
+            textAnchor: "start",
+            dx: 3
         })
     ]
 });
