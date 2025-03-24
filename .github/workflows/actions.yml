@@ -32,7 +32,7 @@ jobs:
           fetch-depth: 0
 
       - name: install uv
-      uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -48,8 +48,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-        run: npm ci
-        run: npm run build
+        run: npm ci && npm run build
 
       - name: upload artifact to pages
         uses: actions/upload-pages-artifact@v3
