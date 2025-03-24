@@ -43,11 +43,13 @@ jobs:
         run: |
           uv pip install -r pyproject.toml
 
-      - name: install Node.js and build files
+      - name: install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+
+      - name: build observable app files
         run: npm ci && npm run build
 
       - name: upload artifact to pages
