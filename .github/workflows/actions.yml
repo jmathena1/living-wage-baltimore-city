@@ -34,7 +34,7 @@ jobs:
       - name: install uv
       uses: astral-sh/setup-uv@v5
 
-      - name: "Set up Python"
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version-file: "pyproject.toml"
@@ -43,7 +43,7 @@ jobs:
         run: |
           uv pip install -r pyproject.toml
 
-      - name: install Node.js
+      - name: install Node.js and build files
         uses: actions/setup-node@v4
         with:
           node-version: 22
