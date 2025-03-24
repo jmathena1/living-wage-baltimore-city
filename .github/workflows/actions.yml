@@ -42,9 +42,6 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "pyproject.toml"
 
-      - name: install python project
-        run: uv sync --all-extras --dev
-
       - name: install Node.js
         uses: actions/setup-node@v4
         with:
