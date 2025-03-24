@@ -6,7 +6,7 @@
     "build": "observable build",
     "dev": "observable preview",
     "deploy": "observable deploy",
-    "install": "uv sync --all-extras --dev",
+    "install": "uv pip install -r --system pyproject.toml",
     "observable": "observable"
   },
   "dependencies": {
